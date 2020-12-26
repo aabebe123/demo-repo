@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ba9aa17c-b5f2-4ef0-90bc-6508b5d870c4" >
+		<http:listener-connection host="localhost" port="9001" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="f7694943-7c0c-47e7-810c-12aea31cde96" >
+		<http:request-connection host="dummy.restapiexample.com" />
+	</http:request-config>
+	<flow name="RetieveEmployeeDetail" doc:id="6a00fd11-0d3a-4f4a-b1e6-5b02af368c79" >
+		<http:listener doc:name="/GET employee" doc:id="aaa492eb-6757-4e3f-ac50-f4eb0e7ddb9d" config-ref="HTTP_Listener_config" allowedMethods="GET" path="/employee"/>
+		<http:request method="GET" doc:name="Invoke employee WS" doc:id="a19d7a18-470e-47a0-b56b-7fdd80bf5312" config-ref="HTTP_Request_configuration" path="/api/v1/employees"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2ca73244-dfb5-43a3-adab-6cb8918c3219" message="**Reterive Employee details WS has been invoked**"/>
+	</flow>
+</mule>
